@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Surasa - Instant Food Stall</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+        }
+        #three-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white">
+    <canvas id="three-canvas"></canvas>
+
+    <div class="relative z-10">
+        <!-- Navigation -->
+        <nav class="fixed top-0 left-0 w-full bg-black/50 backdrop-blur-md z-50">
+            <div class="container mx-auto flex justify-between items-center p-4">
+                <div class="text-2xl font-bold text-orange-500">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 inline-block mr-2" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M11 9H9v2h2V9zm4 0h-2v2h2V9zm-8 0H5v2h2V9zm12-7H7C5.9 2 5 2.9 5 4v3H2v5c0 2.21 1.79 4 4 4h6c2.21 0 4-1.79 4-4V4c0-1.1-.9-2-2-2zm0 5c0 1.1-.9 2-2 2H7V4h10v3z"/>
+                    </svg>
+                    SURASA
+                </div>
+                <ul class="flex space-x-6">
+                    <li><a href="#menu" class="hover:text-orange-500 transition">Menu</a><li>
+                    <li><a href="#about" class="hover:text-orange-500 transition">About</a></li>
+                    <li><a href="#contact" class="hover:text-orange-500 transition">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <header class="min-h-screen flex items-center justify-center text-center relative">
+            <div class="container mx-auto px-4">
+                <h1 class="text-6xl font-bold mb-4 text-orange-500 animate-pulse">
+                    Instant Flavors, 
+                    <br>Extraordinary Taste
+                </h1>
+                <p class="text-xl mb-8 text-gray-300">
+                    Quick, Delicious, and Always Fresh
+                </p>
+                <button class="bg-orange-500 text-white px-8 py-3 rounded-full hover:bg-orange-600 transition transform hover:scale-105">
+                    Order Now
+                </button>
+            </div>
+        </header>
+
+<!-- Menu Section -->
+<section id="menu" class="py-20 bg-black/60 backdrop-blur-md">
+    <div class="container mx-auto">
+        <h2 class="text-4xl font-bold text-center mb-12 text-orange-500">Our Menu</h2>
+        
+        <!-- Menu Categories -->
+        <div class="mb-12 flex justify-center space-x-6">
+            <button class="category-btn active" data-category="all">All</button>
+            <button class="category-btn" data-category="instant-foods">Instant Foods</button>
+            <button class="category-btn" data-category="beverages">Beverages</button>
+            <button class="category-btn" data-category="confectioneries">Confectioneries</button>
+        </div>
+
+        <!-- Menu Grid -->
+        <div class="grid md:grid-cols-3 gap-8" id="menu-grid">
+            <!-- Instant Foods -->
+            <div class="menu-item instant-foods" data-category="instant-foods">
+                <div class="bg-gray-800 p-6 rounded-lg text-center hover:scale-105 transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 mx-auto mb-4 text-orange-500" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M8.1 13.34l2.83-2.83L3.91 3.5c-1.56 1.56-1.56 4.09 0 5.66l4.19 4.18zm6.78-1.81c1.53.71 3.68.21 5.27-1.38 1.91-1.91 2.28-4.69.81-6.16-1.46-1.46-4.24-1.1-6.16.81-1.59 1.59-2.09 3.74-1.38 5.27L3.7 19.87l1.41 1.41L12 14.41l6.88 6.88 1.41-1.41L13.41 13l1.47-1.47z"/>
+                    </svg>
+                    <h3 class="text-xl font-semibold mb-2">Spicy Noodles</h3>
+                    <p class="text-gray-400">Instant fire in every bite</p>
+                </div>
+            </div>
+
+            <!-- Beverages -->
+            <div class="menu-item beverages" data-category="beverages">
+                <div class="bg-gray-800 p-6 rounded-lg text-center hover:scale-105 transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 mx-auto mb-4 text-blue-500" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M21 10.12h-6.78l2.74-2.82c-2.73-2.7-7.15-2.8-9.88-.1-2.73 2.71-2.73 7.08 0 9.79 2.73 2.71 7.15 2.71 9.88 0C18.32 15.65 19 14.08 19 12.1h2c0 1.98-.88 4.55-2.64 6.29-3.51 3.48-9.21 3.48-12.72 0-3.5-3.47-3.53-9.11-.06-12.58 3.47-3.47 9.1-3.47 12.57 0L21 3v7.12zM12.5 8v4.25l3.5 2.08-.72 1.21L11 13V8h1.5z"/>
+                    </svg>
+                    <h3 class="text-xl font-semibold mb-2">Ice Milo</h3>
+                    <p class="text-gray-400">Refreshing & Iconic Drink</p>
+                    <span class="text-green-500 font-bold">Available Now!</span>
+                </div>
+            </div>
+
+            <!-- Confectioneries -->
+            <div class="menu-item confectioneries" data-category="confectioneries">
+                <div class="bg-gray-800 p-6 rounded-lg text-center hover:scale-105 transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 mx-auto mb-4 text-pink-500" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2c-5.52 0-10 4.48-10 10s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 14h-5V7h1.5v6.5H17V16z"/>
+                    </svg>
+                    <h3 class="text-xl font-semibold mb-2">Sweet Delights</h3>
+                    <p class="text-gray-400">Irresistible Treats</p>
+                </div>
+            </div>
+
+            <!-- More Instant Foods -->
+            <div class="menu-item instant-foods" data-category="instant-foods">
+                <div class="bg-gray-800 p-6 rounded-lg text-center hover:scale-105 transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 mx-auto mb-4 text-red-500" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/>
+                    </svg>
+                    <h3 class="text-xl font-semibold mb-2">Instant Pasta</h3>
+                    <p class="text-gray-400">Quick & Delicious</p>
+                </div>
+            </div>
+
+            <!-- More Beverages -->
+            <div class="menu-item beverages" data-category="beverages">
+                <div class="bg-gray-800 p-6 rounded-lg text-center hover:scale-105 transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 mx-auto mb-4 text-teal-500" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M7 2v11h3v9l7-12h-4l4-8z"/>
+                    </svg>
+                    <h3 class="text-xl font-semibold mb-2">Energy Drink</h3>
+                    <p class="text-gray-400">Boost Your Day</p>
+                </div>
+            </div>
+
+            <!-- More Confectioneries -->
+            <div class="menu-item confectioneries" data-category="confectioneries">
+                <div class="bg-gray-800 p-6 rounded-lg text-center hover:scale-105 transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 mx-auto mb-4 text-purple-500" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 14h-5V7h1.5v6.5H17V16z"/>
+                    </svg>
+                    <h3 class="text-xl font-semibold mb-2">Chocolate Bars</h3>
+                    <p class="text-gray-400">Sweet Indulgence</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+        <!-- Footer -->
+        <footer class="bg-black/70 py-12">
+            <div class="container mx-auto text-center">
+                <p>&copy; 2024 Surasa Instant Food Stall. All Rights Reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Three.js Background Animation
+        function createThreeBackground() {
+            const canvas = document.getElementById('three-canvas');
+            const renderer = new THREE.WebGLRenderer({ canvas, alpha: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.z = 5;
+
+            // Floating Food-inspired Particles
+            const geometry = new THREE.BufferGeometry();
+            const vertices = [];
+
+            for (let i = 0; i < 1000; i++) {
+                vertices.push(
+                    Math.random() * 20 - 10,
+                    Math.random() * 20 - 10,
+                    Math.random() * 20 - 10
+                );
+            }
+
+            geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+            
+            const material = new THREE.PointsMaterial({ 
+                color: 0xffa500, 
+                size: 0.05, 
+                transparent: true,
+                opacity: 0.7
+            });
+
+            const particles = new THREE.Points(geometry, material);
+            scene.add(particles);
+
+            function animate() {
+                requestAnimationFrame(animate);
+                particles.rotation.x += 0.001;
+                particles.rotation.y += 0.002;
+                renderer.render(scene, camera);
+            }
+
+            animate();
+
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+        }
+
+        createThreeBackground();
+    </script>
+</body>
+</html>
+
